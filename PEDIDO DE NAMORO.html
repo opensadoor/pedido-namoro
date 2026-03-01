@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Um Pedido Especial 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* ESTRELAS */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+    from {opacity: 0.2;}
+    to {opacity: 1;}
+}
+
+/* CONTAINER */
+.container {
+    position: relative;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 0, 150, 0.6);
+    z-index: 10;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.texto {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 12px 30px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.yes {
+    background: #ff4da6;
+    color: white;
+}
+
+.no {
+    background: #444;
+    color: white;
+    position: absolute;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* CORAÇÕES */
+.heart {
+    position: absolute;
+    color: #ff4da6;
+    font-size: 20px;
+    animation: floatUp 4s linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
+
+.music-btn {
+    margin-top: 20px;
+    background: white;
+    color: #ff4da6;
+    font-weight: bold;
+}
+
+#response {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Você aceita namorar comigo? 💍</h1>
+
+    <div class="texto">
+        Desde que você entrou na minha vida, muita coisa mudou. Os meus dias ficaram mais leves, os sorrisos ficaram mais fáceis e até os problemas parecem menores quando eu penso em você.<br><br>
+
+        Eu gosto do seu jeito, do seu sorriso, da forma como você fala, da paz que você me traz. Não é só paixão… é admiração, carinho e vontade de estar junto.<br><br>
+
+        Eu não quero só momentos, eu quero construir memórias. Quero dividir risadas, sonhos, planos e até os dias difíceis. Quero estar do seu lado não só quando for fácil, mas principalmente quando precisar de alguém de verdade.
+    </div>
+
+    <div style="position:relative;">
+        <button class="yes" onclick="accept()">SIM 💖</button>
+        <button class="no" id="noBtn" onmouseover="moveButton()">NÃO 😅</button>
+    </div>
+
+    <div id="response"></div>
+
+    <button class="music-btn" onclick="playMusic()">Tocar Planos 🎵</button>
+
+    <audio id="bgMusic" loop>
+        <source src="planos.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<script>
+
+/* ESTRELAS */
+for(let i=0; i<150; i++){
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * window.innerHeight + "px";
+    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.animationDuration = (Math.random()*3+1)+"s";
+    document.body.appendChild(star);
+}
+
+/* CORAÇÕES */
+function createHeart(){
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 4000);
+}
+
+setInterval(createHeart, 300);
+
+/* BOTÃO FUGINDO */
+function moveButton(){
+    const btn = document.getElementById("noBtn");
+    btn.style.top = Math.random() * 200 + "px";
+    btn.style.left = Math.random() * 200 + "px";
+}
+
+/* ACEITAR */
+function accept(){
+    document.getElementById("response").innerHTML = "Então deixa eu oficializar… quer ser minha namorada? 💖";
+}
+
+/* MÚSICA */
+function playMusic(){
+    document.getElementById("bgMusic").play();
+}
+
+</script>
+
+</body>
+</html>
